@@ -1,0 +1,6 @@
+li div{
+    color: white !important;
+}
+li div:hover{
+    color: rgba(86, 222, 240, 0.938) !important;
+}
