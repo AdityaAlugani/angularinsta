@@ -1,3 +1,32 @@
+using Microsoft.Identity.Client;
+
+public async Task<string> GetGraphAccessTokenAsync(string userAccessToken)
+{
+    var confidentialClient = ConfidentialClientApplicationBuilder
+        .Create("<Backend-App-Client-ID>")
+        .WithClientSecret("<Backend-App-Client-Secret>")
+        .WithAuthority(new Uri("https://login.microsoftonline.com/<Tenant-ID>"))
+        .Build();
+
+    var userAssertion = new UserAssertion(userAccessToken);
+    var scopes = new[] { "https://graph.microsoft.com/.default" };
+
+    var result = await confidentialClient
+        .AcquireTokenOnBehalfOf(scopes, userAssertion)
+        .ExecuteAsync();
+
+    return result.AccessToken;
+}
+
+
+
+
+
+
+
+
+
+
 **Progress on Development Goals:**  
 Over the past year, I’ve worked on a mix of technical projects and system improvements, focusing on making tools faster, more secure, and easier to use. Here’s a breakdown of what I’ve accomplished:  
 
